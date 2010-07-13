@@ -1,0 +1,9 @@
+<header id="banner" class="body">
+	<h1><a href="{% unless page.title == 'home' %}.{% endunless %}./">RefineryCMS Tutorials<br /><span>Learn and teach others how to work with RefineryCMS.</span></a></h1>
+	<nav><ul>
+		<li{% if page.title == 'home' %} class="active"{% endif %}><a href="{% unless page.title == 'home' %}.{% endunless %}./">home</a></li>
+		{% for category in site.tutorialcategories %}
+		<li{% if page.category == category %} class="active"{% endif %}><a href="{% unless page.title == 'home' %}.{% endunless %}./#{{ category }}">{{ category }}</a></li>
+		{% endfor %}
+	</ul></nav>
+</header><!-- /#banner -->

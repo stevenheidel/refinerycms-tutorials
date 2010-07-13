@@ -1,0 +1,53 @@
+---
+layout: home
+title: home
+---
+
+<aside id="featured" class="body">
+  <article>
+	  <a href="http://refinerycms.com"><figure>
+		  <img src="images/logo-small-medium.png" alt="Refinery CMS Logo" />
+	  </figure></a>
+	  <hgroup>
+		  <h2>Newest Tutorial</h2>
+		  <h3><a href=".{{ site.posts.first.url }}">{{ site.posts.first.title }}</a></h3>
+	  </hgroup>
+	  <p>{{ site.posts.first.description }}</p>
+  </article>
+</aside><!-- /#featured -->
+
+<section id="content" class="body">
+  {% for category in site.tutorialcategories %}
+	<h2 id="{{ category }}">{{ category | capitalize }}</h2>
+	<ol id="{{ category }}" class="hfeed posts-list">
+	  {% for post in site.posts %}
+	  {% if post.category == category %}
+		<li><article class="hentry">	
+			<header>
+				<h2 class="entry-title"><a href=".{{ post.url }}" rel="bookmark" title="{{ post.title }}">{{ post.title }}</a></h2>
+			</header>
+			
+			<footer class="post-info">
+				<abbr class="published" title="{{ post.date | date: '%Y%m%dT%H:%M:%S+%Z' }}"><!-- YYYYMMDDThh:mm:ss+ZZZZ -->
+					{{ post.date | date_to_string }}
+				</abbr>
+
+				<address class="vcard author">
+					{{ post.author }}
+				</address>
+				
+				<a href=".{{ post.url }}#disqus_thread">Comments</a>
+			</footer><!-- /.post-info -->
+			
+			<div class="entry-content">
+				<p>{{ post.description | truncate: 250 }}</p>
+			</div><!-- /.entry-content -->
+		</article></li>
+		{% endif %}
+		{% endfor %}
+	</ol><!-- /#posts-list -->
+	
+	<br />
+	
+	{% endfor %}
+</section><!-- /#content -->
