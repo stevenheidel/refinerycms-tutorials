@@ -1,0 +1,15 @@
+This is a port of the refinerycms tutorials site (http://tutorials.refinerycms.org) from jekyll to refinerycms.
+
+Problems with jekyll:
+- hard to contribute
+- lacking features
+- not refinerycms
+
+Possible solutions:
+- give trusted people user accounts in refinery to edit and make new pages
+- some sort of tutorials plugin that allows for user signup, versioning, etc.
+- a refinerycms-wiki plugin
+
+This idea came from the nice people on the IRC channel, go there to contribute your suggestions as well: #refinerycms
+
+Right now I'm just getting the theme transferred over, so most of the work is happening in the themes/tutorials folder. Please contribute, thanks!
