@@ -3,13 +3,9 @@ cache("#{Refinery.base_cache_key}_#{RefinerySetting.find_or_set(:refinery_menu_c
   if (collection ||= @menu_pages).any?
 -%>
     <nav id='<%= dom_id ||= "menu" %>' class='<%= [css ||= "menu", 'clearfix'].join(' ') %>'>
-      <%= render :partial => "/shared/menu_branch",
-                 :collection => collection,
-                 :locals => {
-                   :hide_children => RefinerySetting.find_or_set(:menu_hide_children, false),
-                   :sibling_count => collection.size - 1
-                 }
-      -%>
+      <% @menu_pages.each do |menu_branch| %>
+      <li<%= " class='active'" if selected_page?(menu_branch) or descendant_page_selected?(menu_branch) %>><%= link_to menu_branch.title, menu_branch.url %></li>
+      <% end %>
     </nav>
 <%
   end
