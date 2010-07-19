@@ -1,5 +1,13 @@
-<div id='footer_content'>
-  <p>
-    Copyright &copy; <%= Time.now.year %> <%= RefinerySetting[:site_name] %>
-  </p>
-</div>
+<footer id="contentinfo" class="body">
+	<address id="about" class="vcard body">
+		<span class="primary">
+			<strong><a href="http://refinerycms.com" class="fn url">Refinery CMS</a></strong>
+			<span class="role">Manage Your Site. Easily.</span>
+		</span><!-- /.primary -->
+	  
+    <%= image_tag "logo.png", :theme => true %>
+	
+		<span class="bio">Refinery CMS was created by <a href="http://resolvedigital.com">Resolve Digital</a> and improved upon by many members of the open source community.</span>	
+	</address><!-- /#about -->
+  <p>2005-<%= Time.now.year %> <a href="http://resolvedigital.com">Resolve Digital</a>.</p>
+</footer><!-- /#contentinfo -->
