@@ -11,12 +11,11 @@
   <%= render :partial => "/shared/header" %>
   
 	<section id="content" class="body">
-		<h1>{{ page.title }}</h1>
-		
+	
     <%= yield %>
 	  
 	  <br />
-	  
+    <!-->
 	  <h2>Comments</h2>
 	  
   	<div id="disqus_thread"></div>
@@ -31,6 +30,7 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=refinerytutorials">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">tutorial comments powered by <span class="logo-disqus">Disqus</span></a>
+    <-->
 	</section>
   
   <%= render :partial => "/shared/extras" %>
