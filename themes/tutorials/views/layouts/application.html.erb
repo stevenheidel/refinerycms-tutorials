@@ -10,8 +10,10 @@
   
   <%= render :partial => "/shared/header" %>
   
-	<section id="content" class="body">
-	
+  <%= render :partial => "/shared/featured" if home_page? %>
+  
+  <section id="content" class="body">
+    
     <%= yield %>
 	  
 	  <br />
