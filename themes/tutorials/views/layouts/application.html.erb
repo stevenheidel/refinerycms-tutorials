@@ -1,21 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <%= render :partial => "/shared/head" %>
-  <body>
-    <%= render :partial => "/shared/site_bar" %>
-    <%= render :partial => "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    <div id='page_container'>
-      <div id='page'>
-        <div id='header' class='clearfix'>
-          <%= render :partial => "/shared/header" %>
-        </div>
-        <div id='body' class='clearfix'>
-          <%= yield %>
-        </div>
-        <div id='footer'>
-          <%= render :partial => "/shared/footer" %>
-        </div>
-      </div>
-    </div>
-  </body>
+<html lang="en">
+
+<%= render :partial => "/shared/head" %>
+
+<body>
+  
+  <%= render :partial => "/shared/site_bar" %>
+  <%= render :partial => "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+  
+  <%= render :partial => "/shared/header" %>
+  
+	<section id="content" class="body">
+		<h1>{{ page.title }}</h1>
+		
+    <%= yield %>
+	  
+	  <br />
+	  
+	  <h2>Comments</h2>
+	  
+  	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_="{{ page.url }}";
+       
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://refinerytutorials.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=refinerytutorials">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">tutorial comments powered by <span class="logo-disqus">Disqus</span></a>
+	</section>
+  
+  <%= render :partial => "/shared/extras" %>
+	
+  <%= render :partial => "/shared/footer" %>
+
+</body>
 </html>
