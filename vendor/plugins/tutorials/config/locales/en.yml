@@ -1,0 +1,16 @@
+en:
+  admin:
+    tutorials:
+      index:
+        create_new: Create a new Tutorial
+        reorder: Reorder Tutorials
+        reorder_done: Done Reordering Tutorials
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no tutorials yet. Click "Create a new Tutorial" to add your first tutorial.
+      tutorial:
+        view_live: View this tutorial live <br/><em>(opens in a new window)</em>
+        edit: Edit this tutorial
+        delete: Remove this tutorial forever
+  tutorials:
+    show:
+      other: Other Tutorials

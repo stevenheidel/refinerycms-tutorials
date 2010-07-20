@@ -1,0 +1,30 @@
+<% form_for [:admin, @tutorial] do |f| -%>
+  <%= f.error_messages %>
+  
+  <div class='field'>
+    <%= f.label :title -%>
+    <%= f.text_field :title, :class => 'larger' -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :description -%>
+    <%= f.text_area :description, :rows => 20, :class => 'wymeditor widest' -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :category -%>
+    <%= f.text_field :category -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :author -%>
+    <%= f.text_field :author -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :content -%>
+    <%= f.text_area :content, :rows => 20, :class => 'wymeditor widest' -%>
+  </div>
+  
+  <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
+<% end -%>

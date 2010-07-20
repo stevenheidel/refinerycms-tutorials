@@ -1,0 +1,16 @@
+nl:
+  admin:
+    tutorials:
+      index:
+        create_new: Maak een nieuwe Tutorial
+        reorder: Wijzig de volgorde van de Tutorials
+        reorder_done: Klaar met het wijzingen van de volgorde van de Tutorials
+        sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+        no_items_yet: Er zijn nog geen tutorials. Druk op 'Maak een nieuwe Tutorial' om de eerste aan te maken.
+      tutorial:
+        view_live: Bekijk deze tutorial op de website <br/><em>(opent een nieuw venster)</em>
+        edit: Bewerk deze tutorial
+        delete: Verwijder deze tutorial voor eeuwig
+  tutorials:
+    show:
+      other: Andere Tutorials
