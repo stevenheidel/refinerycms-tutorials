@@ -5,8 +5,8 @@
 	  </figure></a>
 	  <hgroup>
 		  <h2>Newest Tutorial</h2>
-		  <h3><a href=".{{ site.posts.first.url }}">{{ site.posts.first.title }}</a></h3>
+      <h3><%= link_to Tutorial.last.title, Tutorial.last %></h3>
 	  </hgroup>
-	  <p>{{ site.posts.first.description }}</p>
+    <p><%= Tutorial.last.description %></p>
   </article>
 </aside><!-- /#featured -->

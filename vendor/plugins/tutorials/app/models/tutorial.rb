@@ -6,5 +6,21 @@ class Tutorial < ActiveRecord::Base
   validates_uniqueness_of :title
 
   has_friendly_id :title, :use_slug => true
+  
+  def self.categories
+    categories = []
+    all.each do |tutorial|
+      categories << tutorial.category
+    end
+    categories.uniq
+  end
+  
+  def self.with_category(category)
+    tutorials = []
+    all.each do |tutorial|
+      tutorials << tutorial if tutorial.category == category.to_s
+    end
+    tutorials.uniq
+  end
 
 end

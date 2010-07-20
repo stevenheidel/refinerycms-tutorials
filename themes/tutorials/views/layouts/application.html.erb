@@ -14,15 +14,19 @@
     
     <section id="content" class="body">
       
+      <%= render :partial => "/shared/categorized_tutorials" if home_page? %>
+      
       <%= yield %>
       
-      <%= render :partial => "/shared/comments" if false and is_tutorial? %>
       
+            
     </section>
     
     <%= render :partial => "/shared/extras" %>
   	
     <%= render :partial => "/shared/footer" %>
+    
+    <%= render :partial => "/shared/comment_counter" if home_page? %>
   
   </body>
   

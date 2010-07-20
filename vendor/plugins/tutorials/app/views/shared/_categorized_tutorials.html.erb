@@ -1,0 +1,33 @@
+<% Tutorial.categories.each do |category| %>
+  <h2 id="<%= category %>"><%= category.capitalize %></h2> 
+  <ol id="<%= category %>" class="hfeed posts-list"> 
+    
+  <% Tutorial.with_category(category).each do |tutorial| %>  
+		<li><article class="hentry">	
+			<header> 
+        <h2 class="entry-title"><%= link_to tutorial.title, tutorial %></h2> 
+			</header> 
+			
+			<footer class="post-info"> 
+        <abbr class="published" title="<%= tutorial.created_at %>"><!-- YYYYMMDDThh:mm:ss+ZZZZ --> 
+          <%= tutorial.created_at %>
+				</abbr> 
+ 
+				<address class="vcard author"> 
+          <%= tutorial.author %>
+				</address> 
+				
+        <a href="<%= tutorial_path(tutorial) %>#disqus_thread">Comments</a> 
+			</footer><!-- /.post-info --> 
+			
+			<div class="entry-content"> 
+        <p><%= tutorial.description %></p> 
+			</div><!-- /.entry-content --> 
+		</article></li> 
+  <% end -%>		
+		
+	</ol><!-- /#posts-list --> 
+	
+	<br /> 
+
+<% end -%>
