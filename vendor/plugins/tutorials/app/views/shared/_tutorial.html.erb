@@ -4,8 +4,8 @@
 	</header> 
 	
   <footer class="post-info"> 
-    <abbr class="published" title="<%= tutorial.created_at %>"><!-- YYYYMMDDThh:mm:ss+ZZZZ --> 
-      <%= tutorial.created_at %>
+    <abbr class="published" title="<%= tutorial.created_at.xmlschema %>"><!-- YYYYMMDDThh:mm:ss+ZZZZ --> 
+      <%= tutorial.created_at.strftime("%B %d, %Y") %>
 		</abbr> 
 
 		<address class="vcard author"> 
