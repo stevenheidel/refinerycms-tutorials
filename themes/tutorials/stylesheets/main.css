@@ -113,8 +113,8 @@ aside, nav, article, figure {
 
 /***** Layout *****/
 .body, #site_bar_content {clear: both; margin: 0 auto; width: 800px;}
-a#site_bar_refinery_cms_logo { left: 352px;}
-a#site_bar_refinery_cms_logo:hover { color: transparent !important; }
+a#site_bar_refinery_cms_logo { left: 352px !important;}
+a#site_bar_refinery_cms_logo:hover { background-color: transparent !important; text-shadow: 0px none; }
 img.right figure.right {float: right; margin: 0 0 2em 2em;}
 img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 
