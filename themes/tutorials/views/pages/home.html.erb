@@ -1,0 +1,8 @@
+<% content_for :body_content_left do %>
+
+  <%= render :partial => "/shared/categorized_tutorials" %>
+
+<% end %>
+
+<%= render :partial => "/shared/content_page",
+    :locals => { :hide_sections => [:body_content_title, :body_content_right] } %>
