@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <%= render :partial => "/shared/head" %>
-  
+  <%= render :partial => "/shared/head",
+             :locals => {
+               :theme => true
+             } %>
   <body>
-    
     <%= render :partial => "/shared/site_bar" %>
-    <%= render :partial => "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
-    
     <%= render :partial => "/shared/header" %>
-    
     <%= render :partial => "/shared/featured" if home_page? %>
-    
     <section id="content" class="body">
-            
       <%= yield %>
-            
     </section>
-    
     <%= render :partial => "/shared/extras" %>
-  	
     <%= render :partial => "/shared/footer" %>
-    
     <%= render :partial => "/shared/comment_counter" %>
-  
   </body>
-  
 </html>
