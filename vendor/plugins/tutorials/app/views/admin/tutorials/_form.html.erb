@@ -3,35 +3,35 @@
 
   <div class='field'>
     <%= f.label :title -%>
-    <%= f.text_field :title, :class => 'larger' -%>
+    <%= f.text_field :title, :class => 'larger widest' -%>
   </div>
   
-<div style='float:left; width:49%;'>
-  <div class='field'>
-    <%= f.label :description -%>
-    <%= f.text_area :description, :rows => 5 -%>
-  </div>
-</div>
+  <div class='clearfix'>
+    <div class='hemisquare' style='padding: 0px; margin: 10px 10px 10px 0px'>
+      <div class='field'>
+        <%= f.label :description -%>
+        <%= f.text_area :description, :rows => 5, :cols => 75  -%>
+      </div>
+    </div>
   
-<div style='float:right; width:49%'>
-  <div class='field'>
-    <%= f.label :category -%>
-    <%= f.text_field :category -%>
+    <div class='hemisquare' style='padding: 0px; margin: 10px 0px 10px 60px'>  
+      <div class='field'>
+        <%= f.label :category -%>
+        <%= f.text_field :category, :class => 'widest'-%>
+      </div>
+  
+      <div class='field'>
+        <%= f.label :author -%>
+        <%= f.text_field :author, :class => 'widest' -%>
+      </div>
+    </div>
   </div>
   
-  <div class='field'>
-    <%= f.label :author -%>
-    <%= f.text_field :author -%>
-  </div>
-</div>
-  
-<div style='float:left; width: 99%;'>
   <div class='field'>
     <%= f.label :content -%>
     <%= f.text_area :content, :rows => 20, :class => 'wymeditor widest' -%>
   </div>
   
   <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
-</div>
   
 <% end -%>
