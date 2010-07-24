@@ -14,7 +14,7 @@ Possible solutions:
 
 - give trusted people user accounts in refinery to edit and make new pages
 - some sort of tutorials plugin that allows for user signup, versioning, etc.
-- a refinerycms-wiki plugin [**IN PROGRESS**]
+- a [refinerycms-wiki](http://github.com/parndt/refinerycms-wiki) plugin [**IN PROGRESS**]
 
 ## How can I help?
 
