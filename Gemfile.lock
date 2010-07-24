@@ -1,5 +1,5 @@
 --- 
-hash: 29156eab780b2518a42c583d524ad6e8406abcbe
+hash: 766470d4bf066255dfd614614c720e5057f1e568
 sources: 
 - Git: 
     require: json/pure
@@ -87,6 +87,10 @@ specs:
     version: 1.3.0
 - rspec-rails: 
     version: 1.3.2
+- ruby-prof: 
+    version: 0.8.2
+- spork: 
+    version: 0.8.4
 - sqlite3-ruby: 
     version: 1.3.1
 - test-unit: 
@@ -125,7 +129,7 @@ dependencies:
     group: 
     - :default
   rmagick: 
-    version: ~> 2.12.2
+    version: ~> 2.12.0
     group: 
     - :default
   truncate_html: 
@@ -146,24 +150,12 @@ dependencies:
     - :test
     require: 
     - json/pure
-  rspec: 
-    version: ">= 0"
-    group: 
-    - :test
-  rspec-rails: 
-    version: ">= 0"
-    group: 
-    - :test
   factory_girl: 
     version: ">= 0"
     group: 
     - :test
   test-unit: 
     version: = 1.2.3
-    group: 
-    - :test
-  cucumber-rails: 
-    version: ">= 0"
     group: 
     - :test
   capybara: 
@@ -174,7 +166,35 @@ dependencies:
     version: ">= 0"
     group: 
     - :test
+  cucumber-rails: 
+    version: ">= 0"
+    group: 
+    - :test
+  cucumber: 
+    version: ">= 0"
+    group: 
+    - :test
+  rspec: 
+    version: ">= 0"
+    group: 
+    - :test
+  rspec-rails: 
+    version: ">= 0"
+    group: 
+    - :test
+  spork: 
+    version: ">= 0"
+    group: 
+    - :test
   launchy: 
+    version: ">= 0"
+    group: 
+    - :test
+  gherkin: 
+    version: ">= 0"
+    group: 
+    - :test
+  ruby-prof: 
     version: ">= 0"
     group: 
     - :test
