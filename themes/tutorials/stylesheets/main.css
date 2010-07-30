@@ -321,6 +321,8 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	Footer
 *****************/
 #contentinfo {padding-bottom: 2em; text-align: right;}
+#contentinfo p.left {float: left;}
+#contentinfo p.right {float: right;}
 
 /***** Sections *****/
 /* Blog */
