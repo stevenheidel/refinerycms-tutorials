@@ -8,8 +8,7 @@
 
 <% content_for :body_content_right do %>
   <%= render :partial => "/shared/comments", :locals => { :tutorial_id => @tutorial.id } %>
-  <h3>Tags:</h3>
-  <p><%= @tutorial.tag_list %><% # these should link soon %></p>
+  <%= render :partial => '/shared/tag_list', :locals => { :tutorial => @tutorial } %>
 <% end %>
 
 <%= render :partial => "/shared/content_page" %>

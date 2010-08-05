@@ -1,0 +1,5 @@
+<% if tutorial.tags.any? -%>
+  <p>Tags: <% tutorial.tag_list.each do |tag| -%>
+    <%= link_to tag, tagged_tutorials_path(tag)  %>
+  <% end -%></p>
+<% end -%>

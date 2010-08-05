@@ -17,6 +17,6 @@
 			
 	<div class="entry-content"> 
     <p><%= tutorial.description %></p> 
-    <p>Tags: <%= tutorial.tag_list %></p>
+    <%= render :partial => '/shared/tag_list', :locals => { :tutorial => tutorial } %>
 	</div><!-- /.entry-content --> 
 </article></li> 
