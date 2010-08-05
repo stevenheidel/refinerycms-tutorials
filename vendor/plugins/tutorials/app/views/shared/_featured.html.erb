@@ -5,8 +5,8 @@
 	  </figure></a>
 	  <hgroup>
 		  <h2>Newest Tutorial</h2>
-      <h3><%= link_to Tutorial.last.title, Tutorial.last rescue "No Tutorials!" %></h3>
+      <h3><%= link_to Tutorial.live.last.title, Tutorial.live.last rescue "No Tutorials!" %></h3>
 	  </hgroup>
-    <p><%= Tutorial.last.description rescue "No Tutorials!" %></p>
+    <p><%= Tutorial.live.last.description rescue "No Tutorials!" %></p>
   </article>
 </aside><!-- /#featured -->
