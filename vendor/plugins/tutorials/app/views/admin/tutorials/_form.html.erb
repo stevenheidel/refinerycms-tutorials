@@ -19,6 +19,11 @@
         <%= f.label :level -%>
         <%= f.select :level, Tutorial::CATEGORIES, :class => 'widest'-%>
       </div>
+      
+      <div class='field' style='margin-bottom: 0px'>
+        <%= f.label :tag_list, 'Tags' -%>
+        <%= f.text_field :tag_list, :class => 'widest'-%>
+      </div>
 
       <div class='field' style='margin-bottom: 0px'>
         <%= f.label :author, 'Author' -%>
