@@ -7,7 +7,7 @@
 		  <h2>Newest Tutorial</h2>
 		  <% unless (last_tutorial = Tutorial.live.last).nil? %>
         <h3><%= link_to last_tutorial.title, tutorial_url(last_tutorial) %></h3>
-        <h4>by <%= last_tutorial.author %></h4>
+        <h6>by <%= last_tutorial.author %></h6>
       <% else %>
         No Tutorials!
       <% end %>
