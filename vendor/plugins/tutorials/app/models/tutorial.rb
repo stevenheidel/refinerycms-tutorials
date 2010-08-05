@@ -6,7 +6,9 @@ class Tutorial < ActiveRecord::Base
   validates_uniqueness_of :title
 
   has_friendly_id :title, :use_slug => true
-  
+
+  named_scope :live, :conditions => {:draft => false}
+
   def self.categories
     categories = []
     all.each do |tutorial|
@@ -14,7 +16,7 @@ class Tutorial < ActiveRecord::Base
     end
     categories.uniq
   end
-  
+
   def self.with_category(category)
     tutorials = []
     all.each do |tutorial|
