@@ -5,8 +5,18 @@
 	  </figure></a>
 	  <hgroup>
 		  <h2>Newest Tutorial</h2>
-      <h3><%= link_to Tutorial.live.last.title, Tutorial.live.last rescue "No Tutorials!" %></h3>
+		  <% unless (last_tutorial = Tutorial.live.last).nil? %>
+        <h3><%= link_to last_tutorial.title, tutorial_url(last_tutorial) %></h3>
+        <h4>by <%= last_tutorial.author %></h4>
+      <% else %>
+        No Tutorials!
+      <% end %>
 	  </hgroup>
-    <p><%= Tutorial.live.last.description rescue "No Tutorials!" %></p>
+	  <% unless last_tutorial.nil? %>
+      <p>
+        <%= last_tutorial.description %>
+      </p>
+    <% end %>
+      
   </article>
 </aside><!-- /#featured -->
