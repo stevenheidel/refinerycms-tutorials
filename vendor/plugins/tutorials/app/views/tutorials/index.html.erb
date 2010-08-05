@@ -1,4 +1,8 @@
+<% content_for :body_content_title do %>
+  Tutorials <%= "tagged &#8220;#{params[:tag]}&#8221;" if params[:tag] %>
+<% end %>
 <% content_for :body_content_left do %>
+  <%= '<p>We couldn\'t find any tutorials with that tag</p>' if @tutorials.empty? %>
   <ol id="tutorials" class="hfeed posts-list">
 
   <% @tutorials.each do |tutorial| %>
