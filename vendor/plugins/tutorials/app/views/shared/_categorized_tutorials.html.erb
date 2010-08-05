@@ -1,13 +1,13 @@
-<% Tutorial.categories.each do |category| %>
-  <h2 id="<%= category %>"><%= category.capitalize %></h2> 
-  <ol id="<%= category %>" class="hfeed posts-list"> 
-    
-  <% Tutorial.with_category(category).each do |tutorial| %>  
+<% Tutorial.live.categories.each do |category| %>
+  <h2 id="<%= category %>"><%= category.capitalize %></h2>
+  <ol id="<%= category %>" class="hfeed posts-list">
+
+  <% Tutorial.live.with_category(category).each do |tutorial| %>
     <%= render :partial => "/shared/tutorial", :locals => { :tutorial => tutorial } %>
-  <% end -%>		
-		
-	</ol><!-- /#posts-list --> 
-	
-	<br /> 
+  <% end -%>
+
+	</ol><!-- /#posts-list -->
+
+	<br />
 
 <% end -%>
