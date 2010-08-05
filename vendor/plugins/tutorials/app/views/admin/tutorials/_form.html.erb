@@ -5,7 +5,7 @@
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest' -%>
   </div>
-  
+
   <div class='clearfix'>
     <div class='hemisquare' style='padding: 0px; margin: 10px 10px 10px 0px'>
       <div class='field'>
@@ -13,25 +13,34 @@
         <%= f.text_area :description, :rows => 5, :cols => 75  -%>
       </div>
     </div>
-  
-    <div class='hemisquare' style='padding: 0px; margin: 10px 0px 10px 60px'>  
-      <div class='field'>
+
+    <div class='hemisquare' style='padding: 0px; margin: 10px 0px 10px 60px'>
+      <div class='field' style='margin-bottom: 0px'>
         <%= f.label :category -%>
         <%= f.text_field :category, :class => 'widest'-%>
       </div>
-  
-      <div class='field'>
-        <%= f.label :author -%>
+
+      <div class='field' style='margin-bottom: 0px'>
+        <%= f.label :author, 'Author' -%>
         <%= f.text_field :author, :class => 'widest' -%>
+      </div>
+
+      <div class='field'>
+        <%= f.check_box :draft %>
+        <%= f.label :draft, 'Save as Draft?', :class => 'stripped'%>
       </div>
     </div>
   </div>
-  
+
   <div class='field'>
     <%= f.label :content -%>
     <%= f.text_area :content, :rows => 20, :class => 'wymeditor widest' -%>
   </div>
-  
-  <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => true} %>
-  
+
+  <%= render :partial => "/shared/admin/form_actions",
+             :locals => {
+               :f => f,
+               :continue_editing => true
+             } %>
+
 <% end -%>
