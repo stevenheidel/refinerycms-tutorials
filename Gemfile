@@ -54,4 +54,4 @@ gem 'refinerycms',    '= 0.9.7.10'
 # gem "refinerycms-news", "~> 0.9.7.3", :require => "news"
 # gem "refinerycms-portfolio", "~> 0.9.6", :require => "portfolio"
 gem 'albino'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '2.0.0.rc1'

@@ -1,5 +1,5 @@
 --- 
-hash: 6566cd107e8a0e19c97adc364217d233123738e4
+hash: 777a5c743d94c2afa2d428e20b28e78c9e946a29
 sources: 
 - Git: 
     require: json/pure
@@ -25,7 +25,7 @@ specs:
 - activeresource: 
     version: 2.3.8
 - acts-as-taggable-on: 
-    version: 2.0.6
+    version: 2.0.0.rc1
 - acts_as_indexed: 
     version: 0.6.3
 - albino: 
@@ -209,6 +209,6 @@ dependencies:
     group: 
     - :default
   acts-as-taggable-on: 
-    version: ">= 0"
+    version: = 2.0.0.rc1
     group: 
     - :default

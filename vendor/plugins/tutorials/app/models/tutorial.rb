@@ -3,6 +3,7 @@ class Tutorial < ActiveRecord::Base
   CATEGORIES = %w(Beginner Intermediate Advanced)
 
   acts_as_indexed :fields => [:title, :description, :category, :author, :content]
+  acts_as_taggable
 
   alias_attribute :level, :category
 
