@@ -17,9 +17,10 @@
     <div class='hemisquare' style='padding: 0px; margin: 10px 0px 10px 60px'>
       <div class='field' style='margin-bottom: 0px'>
         <%= f.label :level -%>
-        <%= f.select :level, Tutorial::CATEGORIES, :class => 'widest'-%>
+        <%= f.select :level, RefinerySetting.find_or_set(:tutorial_categories, %w(Beginner Intermediate Advanced)),
+                     :class => 'widest'-%>
       </div>
-      
+
       <div class='field' style='margin-bottom: 0px'>
         <%= f.label :tag_list, 'Tags' -%>
         <%= f.text_field :tag_list, :class => 'widest'-%>
