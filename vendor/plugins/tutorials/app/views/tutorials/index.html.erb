@@ -1,11 +1,11 @@
 <% content_for :body_content_left do %>
-  <ol id="tutorials" class="hfeed posts-list"> 
-    
-  <% Tutorial.all.each do |tutorial| %>  
+  <ol id="tutorials" class="hfeed posts-list">
+
+  <% @tutorials.each do |tutorial| %>
     <%= render :partial => "/shared/tutorial", :locals => { :tutorial => tutorial } %>
-  <% end -%>		
-		
-	</ol><!-- /#posts-list -->	
+  <% end -%>
+
+	</ol><!-- /#posts-list -->
 <% end %>
 
 <%= render :partial => "/shared/content_page" %>
