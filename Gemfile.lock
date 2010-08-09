@@ -1,14 +1,115 @@
 --- 
-hash: 777a5c743d94c2afa2d428e20b28e78c9e946a29
-sources: 
-- Git: 
-    require: json/pure
-    git: git://github.com/parndt/json.git
-    branch: master
-    uri: git://github.com/parndt/json.git
-    ref: 34ad345d48764f3acf87a032b3efb4b1908b7213
-- Rubygems: 
-    uri: http://gemcutter.org
+dependencies: 
+  test-unit: 
+    group: 
+    - :test
+    version: = 1.2.3
+  spork: 
+    group: 
+    - :test
+    version: ">= 0"
+  rails: 
+    group: 
+    - :default
+    version: = 2.3.8
+  authlogic: 
+    group: 
+    - :default
+    version: = 2.1.5
+    require: 
+    - authlogic
+  sqlite3-ruby: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - sqlite3
+  refinerycms: 
+    group: 
+    - :default
+    version: = 0.9.7.11
+  ruby-prof: 
+    group: 
+    - :test
+    version: ">= 0"
+  acts-as-taggable-on: 
+    group: 
+    - :default
+    version: = 2.0.0.rc1
+  truncate_html: 
+    group: 
+    - :default
+    version: = 0.3.2
+    require: 
+    - truncate_html
+  acts_as_indexed: 
+    group: 
+    - :default
+    version: = 0.6.3
+    require: 
+    - acts_as_indexed
+  rspec: 
+    group: 
+    - :test
+    version: ">= 0"
+  rspec-rails: 
+    group: 
+    - :test
+    version: ">= 0"
+  database_cleaner: 
+    group: 
+    - :test
+    version: ">= 0"
+  friendly_id: 
+    group: 
+    - :default
+    version: = 3.0.6
+    require: 
+    - friendly_id
+  will_paginate: 
+    group: 
+    - :default
+    version: = 2.3.14
+    require: 
+    - will_paginate
+  factory_girl: 
+    group: 
+    - :test
+    version: ">= 0"
+  cucumber-rails: 
+    group: 
+    - :test
+    version: ">= 0"
+  gherkin: 
+    group: 
+    - :test
+    version: ">= 0"
+  rmagick: 
+    group: 
+    - :default
+    version: ~> 2.12.0
+  cucumber: 
+    group: 
+    - :test
+    version: ">= 0"
+  json_pure: 
+    group: 
+    - :test
+    version: = 1.4.5
+    require: 
+    - json/pure
+  albino: 
+    group: 
+    - :default
+    version: ">= 0"
+  launchy: 
+    group: 
+    - :test
+    version: ">= 0"
+  capybara: 
+    group: 
+    - :test
+    version: ">= 0"
 specs: 
 - rake: 
     version: 0.8.7
@@ -45,8 +146,7 @@ specs:
 - ffi: 
     version: 0.6.3
 - json_pure: 
-    version: 1.4.3
-    source: 0
+    version: 1.4.5
 - rubyzip: 
     version: 0.9.4
 - selenium-webdriver: 
@@ -82,7 +182,7 @@ specs:
 - rails: 
     version: 2.3.8
 - refinerycms: 
-    version: 0.9.7.10
+    version: 0.9.7.11
 - rmagick: 
     version: 2.12.2
 - rspec: 
@@ -101,114 +201,7 @@ specs:
     version: 0.3.2
 - will_paginate: 
     version: 2.3.14
-dependencies: 
-  sqlite3-ruby: 
-    version: ">= 0"
-    group: 
-    - :default
-    require: 
-    - sqlite3
-  acts_as_indexed: 
-    version: = 0.6.3
-    group: 
-    - :default
-    require: 
-    - acts_as_indexed
-  authlogic: 
-    version: = 2.1.5
-    group: 
-    - :default
-    require: 
-    - authlogic
-  friendly_id: 
-    version: = 3.0.6
-    group: 
-    - :default
-    require: 
-    - friendly_id
-  rails: 
-    version: = 2.3.8
-    group: 
-    - :default
-  rmagick: 
-    version: ~> 2.12.0
-    group: 
-    - :default
-  truncate_html: 
-    version: = 0.3.2
-    group: 
-    - :default
-    require: 
-    - truncate_html
-  will_paginate: 
-    version: = 2.3.14
-    group: 
-    - :default
-    require: 
-    - will_paginate
-  json_pure: 
-    version: ">= 0"
-    group: 
-    - :test
-    require: 
-    - json/pure
-  factory_girl: 
-    version: ">= 0"
-    group: 
-    - :test
-  test-unit: 
-    version: = 1.2.3
-    group: 
-    - :test
-  capybara: 
-    version: ">= 0"
-    group: 
-    - :test
-  database_cleaner: 
-    version: ">= 0"
-    group: 
-    - :test
-  cucumber-rails: 
-    version: ">= 0"
-    group: 
-    - :test
-  cucumber: 
-    version: ">= 0"
-    group: 
-    - :test
-  rspec: 
-    version: ">= 0"
-    group: 
-    - :test
-  rspec-rails: 
-    version: ">= 0"
-    group: 
-    - :test
-  spork: 
-    version: ">= 0"
-    group: 
-    - :test
-  launchy: 
-    version: ">= 0"
-    group: 
-    - :test
-  gherkin: 
-    version: ">= 0"
-    group: 
-    - :test
-  ruby-prof: 
-    version: ">= 0"
-    group: 
-    - :test
-  refinerycms: 
-    version: = 0.9.7.10
-    group: 
-    - :default
-  albino: 
-    version: ">= 0"
-    group: 
-    - :default
-  acts-as-taggable-on: 
-    version: = 2.0.0.rc1
-    group: 
-    - :default
+hash: 9c0a4cd6be8539b1ea93b9c8c8c1ff0dcf451760
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

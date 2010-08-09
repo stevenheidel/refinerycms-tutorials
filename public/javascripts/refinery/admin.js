@@ -32,9 +32,6 @@ init_interface = function() {
   // make sure that users can tab to wymeditor fields and add an overlay while loading.
   $('textarea.wymeditor').each(function() {
     textarea = $(this);
-    /*overlay = $("<div class='wym_loading_overlay'>&nbsp;</div>")
-              .css({'height': textarea.height(), 'width': textarea.width()});
-    textarea.before(overlay);*/
     if ((instance = WYMeditor.INSTANCES[$((textarea.next('.wym_box').find('iframe').attr('id')||'').split('_')).last().get(0)]) != null) {
       if ((next = textarea.parent().next()) != null && next.length > 0) {
         next.find('input, textarea').keydown($.proxy(function(e) {
@@ -62,9 +59,21 @@ init_interface = function() {
   $('form input[type=text]:first').focus();
 
   // ensure that the menu isn't wider than the page_container or else it looks silly to round that corner.
-  var last_item_offset = (last_item = $('#menu a:visible:last')).offset();
-  if (last_item_offset && ((last_item_offset.left + last_item.outerWidth() - $('#menu').offset().left + 5) < $('#page_container').outerWidth())) {
-    $("#page_container:not('.login #page_container')").corner('5px tr');
+  if (($menu = $('#menu')).length > 0) {
+    $menu.jcarousel({
+      vertical: false
+      , scroll: 1
+      , buttonNextHTML: "<img src='/images/refinery/carousel-right.png' alt='down' height='15' width='10' />"
+      , buttonPrevHTML: "<img src='/images/refinery/carousel-left.png' alt='up' height='15' width='10' />"
+      , listTag: $menu.get(0).tagName.toLowerCase()
+      , itemTag: $menu.children(':first').get(0).tagName.toLowerCase()
+    });
+
+    if ($menu.outerWidth() < $('#page_container').outerWidth()) {
+      $("#page_container:not('.login #page_container')").corner('5px tr');
+    } else {
+      $("#page_container:not('.login #page_container')").uncorner();
+    }
   }
 
   $('#current_locale li a').click(function(e) {
@@ -107,8 +116,8 @@ init_flash_messages = function(){
 init_modal_dialogs = function(){
   $('a[href*="dialog=true"]').not('#dialog_container a').each(function(i, anchor) {
     $(anchor).data({
-      'dialog-width': parseInt($(anchor.href.match("width=([0-9]*)")).last().get(0), 928)||928
-      , 'dialog-height': parseInt($(anchor.href.match("height=([0-9]*)")).last().get(0), 473)||473
+      'dialog-width': parseInt($($(anchor).attr('href').match("width=([0-9]*)")).last().get(0))||928
+      , 'dialog-height': parseInt($($(anchor).attr('href').match("height=([0-9]*)")).last().get(0))||473
       , 'dialog-title': ($(anchor).attr('title') || $(anchor).attr('name') || $(anchor).html() || null)
     }).attr('href', $(anchor).attr('href').replace(/(\&(amp\;)?)?dialog\=true/, '')
                                           .replace(/(\&(amp\;)?)?width\=\d+/, '')
@@ -257,8 +266,9 @@ init_tooltips = function(args){
         tooltip.css({
           'opacity': 0
           , 'maxWidth': '300px'
-          , 'left': ((left = $(this).offset().left - (tooltip.outerWidth() / 2) + ($(this).outerWidth() / 2)) >= 0 ? left : 0)
         });
+        required_left_offset = $(this).offset().left - (tooltip.outerWidth() / 2) + ($(this).outerWidth() / 2);
+        tooltip.css('left', (required_left_offset > 0 ? required_left_offset : 0));
 
         var tooltip_offset = tooltip.offset();
         var tooltip_outer_width = tooltip.outerWidth();
@@ -276,7 +286,7 @@ init_tooltips = function(args){
 
         if (tooltip_offset = tooltip.offset()) {
           nib.css({
-            'left': tooltip_offset.left + (tooltip_outer_width / 2) - 5
+            'left': $(this).offset().left + ($(this).outerWidth() / 2) - 5
             , 'top': tooltip_offset.top + tooltip.height()
           });
         }
@@ -298,18 +308,26 @@ init_tooltips = function(args){
 
     }, function(e) {
       $(this).stopTime('tooltip');
-      (tooltip = $('.tooltip')).css('z-index', '-1').animate({
-        top: tooltip.offset().top - 20
+      if ((tt_offset = (tooltip = $('.tooltip')).css('z-index', '-1').offset()) == null) {
+        tt_offset = {'top':0,'left':0};
+      }
+      tooltip.animate({
+        top: tt_offset.top - 20
         , opacity: 0
       }, 125, 'swing', function(){
         $(this).remove();
       });
-      (nib = $('.tooltip-nib')).animate({
-        top: nib.offset().top - 20
+      if ((nib_offset = (nib = $('.tooltip-nib')).offset()) == null) {
+        nib_offset = {'top':0,'left':0};
+      }
+      nib.animate({
+        top: nib_offset.top - 20
         , opacity: 0
       }, 125, 'swing', function(){
         $(this).remove();
-      })
+      });
+    }).click(function(e) {
+      $(this).stopTime('tooltip');
     });
     if ($(element).attr('tooltip') == null) {
       $(element).attr('tooltip', $(element).attr('title'));
@@ -823,9 +841,24 @@ var list_reorder = {
       serialized += "&continue_reordering=false";
 
       $.post(list_reorder.update_url, serialized, function(data) {
-        $(list_reorder.sortable_list).html(data);
+        // handle the case where we get the whole list back including the <ul> or whatever.
+        if (data.match(new RegExp("^"+ $(list_reorder.sortable_list).get(0).tagName.toLowerCase() + "\ id=\"|\'" + list_reorder.sortable_list + "\"|\'>")).length == 1) {
+          // replace reorder authenticity token's value.
+          $('#reorder_authenticity_token').val($($(data.split('reorder_authenticity_token')).last().get(0).split('value=\'')).last().get(0).split('\'')[0]);
+          // replace actual list content.
+          $(list_reorder.sortable_list).html($(data).html());
+        } else {
+          $(list_reorder.sortable_list).html(data);
+        }
 
-        list_reorder.restore_controls(e);
+        // if we get passed a script tag, re-enable reordering.
+        matches = data.replace('"', "'")
+                      .match(/<script\ type='text\/javascript'>([^<]*)<\/script>/im);
+        if (matches != null && matches.length > 1) {
+          list_reorder.enable_reordering();
+        } else {
+          list_reorder.restore_controls(e);
+        }
       });
     } else {
       list_reorder.restore_controls(e);
