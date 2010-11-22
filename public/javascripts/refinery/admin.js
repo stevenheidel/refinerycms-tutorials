@@ -144,7 +144,9 @@ init_modal_dialogs = function(){
       if ($.browser.msie) {
         iframe.css({'margin':'-2px 2px 2px -2px'});
       }
-      $(document.body).addClass('hide-overflow');
+      if(parseInt($anchor.data('dialog-height')) < $(window).height()) {
+        $(document.body).addClass('hide-overflow');
+      }
       e.preventDefault();
     });
   });
@@ -158,6 +160,7 @@ init_sortable_menu = function(){
   $menu.sortable({
     axis: 'x',
     cursor: 'crosshair',
+    connectWith: '.nested',
     update: function(){
       var ser   = $menu.sortable('serialize', {key: 'menu[]', expression: /plugin_([\w]*)$/}),
           token = escape($('#admin_authenticity_token').val());
@@ -171,7 +174,7 @@ init_sortable_menu = function(){
   $menu.find('#menu_reorder').click(function(e){
     e.preventDefault();
     $('#menu_reorder, #menu_reorder_done').toggle();
-    $('#site_bar, #header >*:not(#header_content, #menu, script), #content').fadeTo(500, 0.65);
+    $('#site_bar, header >*:not(#menu, script), #content').fadeTo(500, 0.65);
     $menu.find('.tab a').click(function(ev){
       ev.preventDefault();
     });
@@ -182,7 +185,7 @@ init_sortable_menu = function(){
   $menu.find('#menu_reorder_done').click(function(e){
     e.preventDefault();
     $('#menu_reorder, #menu_reorder_done').toggle();
-    $('#site_bar, #header >*:not(#header_content, #menu, script), #content').fadeTo(500, 1);
+    $('#site_bar, header >*:not(#menu, script), #content').fadeTo(500, 1);
     $menu.find('.tab a').unbind('click');
 
     $menu.sortable('disable');
@@ -427,7 +430,7 @@ var link_dialog = {
   },
 
   web_tab: function(){
-    $('#web_address_text').change(function(){
+    $('#web_address_text').bind('paste change',function(){
       var prefix = '#web_address_',
           icon = '';
 
@@ -783,6 +786,7 @@ var list_reorder = {
       , 'cursor': 'drag'
       , 'items': 'li'
       , 'axis': 'y'
+      , 'connectWith' : '.nested'
     };
 
     $(list_reorder.sortable_list).find('li').each(function(index, li) {
@@ -792,7 +796,7 @@ var list_reorder = {
 
     if (list_reorder.tree && !$.browser.msie) {
       $(list_reorder.sortable_list).parent().nestedSortable($.extend(sortable_options, {
-        'maxDepth': 1
+        'maxDepth': 2
         , 'placeholderElement': 'li'
       }));
       $(list_reorder.sortable_list).addClass('ui-sortable');
@@ -800,7 +804,7 @@ var list_reorder = {
       $(list_reorder.sortable_list).sortable(sortable_options);
     }
 
-    $('#site_bar, #header > *:not(script)').fadeTo(500, 0.3);
+    $('#site_bar, header > *:not(script)').fadeTo(500, 0.3);
     $('#actions *:not("#reorder_action_done, #reorder_action")').not($('#reorder_action_done').parents('li, ul')).fadeTo(500, 0.55);
 
     $('#reorder_action').hide();
@@ -824,8 +828,11 @@ var list_reorder = {
   }
 
   , disable_reordering: function(e) {
+    if($('#reorder_action_done').hasClass('loading')){
+      return false;
+    }
     if(e) { e.preventDefault(); }
-
+    $('#reorder_action_done').addClass('loading');
     if (list_reorder.update_url != null) {
       serialized = "";
       list_reorder.sortable_list.find('> li[id]').each(function(index, li) {
@@ -842,9 +849,13 @@ var list_reorder = {
 
       $.post(list_reorder.update_url, serialized, function(data) {
         // handle the case where we get the whole list back including the <ul> or whatever.
-        if (data.match(new RegExp("^"+ $(list_reorder.sortable_list).get(0).tagName.toLowerCase() + "\ id=\"|\'" + list_reorder.sortable_list + "\"|\'>")).length == 1) {
+        if ((matches = data.match(new RegExp("^<" + list_reorder.sortable_list.get(0).tagName.toLowerCase()
+                                             + "[^>]+" + list_reorder.sortable_list.attr('id') + "[^>]>"))) != null)
+        {
           // replace reorder authenticity token's value.
-          $('#reorder_authenticity_token').val($($(data.split('reorder_authenticity_token')).last().get(0).split('value=\'')).last().get(0).split('\'')[0]);
+          $('#reorder_authenticity_token').val(
+            $($(data.split('reorder_authenticity_token')).last().get(0).split('value=\''))
+              .last().get(0).split('\'')[0]);
           // replace actual list content.
           $(list_reorder.sortable_list).html($(data).html());
         } else {
@@ -873,9 +884,9 @@ var list_reorder = {
     }
     $(list_reorder.sortable_list).removeClass('reordering, ui-sortable');
 
-    $('#site_bar, #header > *:not(script)').fadeTo(250, 1);
+    $('#site_bar, header > *:not(script)').fadeTo(250, 1);
     $('#actions *:not("#reorder_action_done, #reorder_action")').not($('#reorder_action_done').parents('li, ul')).fadeTo(250, 1, function() {
-      $('#reorder_action_done').hide();
+      $('#reorder_action_done').hide().removeClass('loading');
       $('#reorder_action').show();
     });
   }
@@ -939,18 +950,21 @@ var resource_picker = {
 }
 
 close_dialog = function(e) {
-  if (parent
-      && parent.document.location.href != document.location.href
-      && $.isFunction(parent.$))
+  if (parent && parent.document.location.href != document.location.href && $.isFunction(parent.$))
   {
-    $(parent.document.body).removeClass('hide-overflow');
-    parent.$('.ui-dialog').dialog('close').remove();
+    the_body = $(parent.document.body)
+    the_dialog = parent.$('.ui-dialog');
   } else {
-    $(document.body).removeClass('hide-overflow');
-    $('.ui-dialog').dialog('close').remove();
+    the_body = $(document.body).removeClass('hide-overflow');
+    the_dialog = $('.ui-dialog').dialog('close').remove();
   }
+  // if there's a wymeditor involved then let it do its thing without blocking first.
+  if (!($(document.body).hasClass('wym_iframe_body'))) {
+    the_body.removeClass('hide-overflow');
+    the_dialog.dialog('close').remove();
 
-  e.preventDefault();
+    e.preventDefault();
+  }
 }
 
 //parse a URL to form an object of properties
